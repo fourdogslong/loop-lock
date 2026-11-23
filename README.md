@@ -1,5 +1,7 @@
 # Loop Lock
 
+![Loop Lock icon](icon.png)
+
 A LUNA Browser Add On by **fourdogslong** that preserves the orange Loop ruler range while you move the playback cursor or edit the blue selection.
 
 ![Loop Lock showing the active Persistent Loop button, range, and settings gear](docs/loop-lock.png)
@@ -9,7 +11,7 @@ A LUNA Browser Add On by **fourdogslong** that preserves the orange Loop ruler r
 Requires LUNA 3.1.2 or later.
 
 - In LUNA, open **Add Ons → Manage → Import URL** and enter `https://github.com/Fourdogslong/loop-lock`.
-- Or download `Loop-Lock-0.3.14.lunaaddon` from the [latest release](https://github.com/Fourdogslong/loop-lock/releases/latest) and open it in LUNA.
+- Or download `Loop-Lock-0.3.15.lunaaddon` from the [latest release](https://github.com/Fourdogslong/loop-lock/releases/latest) and open it in LUNA.
 
 ## Use
 
