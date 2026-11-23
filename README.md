@@ -14,11 +14,11 @@ Requires LUNA 3.1.2 or later.
 ## Use
 
 1. Open **Loop Lock** from LUNA’s Add Ons Browser.
-2. Set an orange range in the Loop ruler and click the padlock button to enable Persistent Loop.
-3. Click a track lane and press Space to start from the edit cursor. LUNA’s transport **Loop** button controls whether playback repeats.
-4. Drag the orange range or use LUNA’s **Update Loop** command (⌘L on macOS). The gear menu also includes **Use Timeline Selection**.
+2. Set an orange range in the Loop ruler and click the padlock button to enable Lock Loop.
+3. Click a track lane and press Space to start playback from the edit cursor. LUNA’s transport **Loop** button controls whether playback repeats.
+4. Drag the orange range or use LUNA’s **Update Loop** command (⌘L on macOS) to change the loop location.
 
-By default, Loop Lock turns off **Link Edit/Play Selections** while active and restores your previous setting when you turn it off. You can change this in the gear menu.
+By default, Loop Lock turns off **Link Edit/Play Selections** while active and restores your previous setting when you turn it off. You can change this in the settings.
 
 Starting at or after the orange loop end plays forward. Loop Lock remembers the range for when you move back before its end. LUNA’s orange ruler may update a moment after the range changes.
 
