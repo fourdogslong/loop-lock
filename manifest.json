@@ -1,0 +1,21 @@
+{
+  "package_name": "Loop Lock",
+  "id": "com.example.loop_lock",
+  "title": "Loop Lock",
+  "version": "0.3.14",
+  "description": "Keep a loop active while moving the Timeline playback start.",
+  "sdk_version": "3.1.2",
+  "min_luna_version": "3.1.2",
+  "engines": [
+    "luna"
+  ],
+  "html": "loop-lock.html",
+  "target": "browser",
+  "run_hidden": true,
+  "manufacturer": "fourdogslong",
+  "icon": "icon-lit.svg",
+  "categories": [
+    "Workflow",
+    "Utility"
+  ]
+}

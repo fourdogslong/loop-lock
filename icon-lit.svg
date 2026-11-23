@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Loop Lock">
+  <rect x="12" y="12" width="488" height="488" rx="72" fill="#252729"/>
+  <rect x="72" y="87" width="368" height="338" rx="30" fill="#141516"/>
+  <rect x="55" y="70" width="402" height="372" rx="46" fill="#fff" opacity=".05"/>
+  <rect x="63" y="78" width="386" height="356" rx="40" fill="#fff" opacity=".09"/>
+  <rect x="70" y="85" width="372" height="342" rx="34" fill="#fff" opacity=".16"/>
+  <rect x="77" y="92" width="358" height="328" rx="26" fill="#f5f5f2" stroke="#fff" stroke-width="4"/>
+  <g transform="translate(112 101) scale(9)" fill="none" stroke="#151718" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M10.5 12V8a5.5 5.5 0 0 1 11 0v4" stroke-width="2.2"/>
+    <rect x="5" y="12" width="22" height="17" rx="3.2" stroke-width="2.2"/>
+    <path d="M10.5 20.6c0-2.1 1.6-3.4 3.5-3.4h7.3m-1.7-1.7 1.7 1.7-1.7 1.7m1.9 1.5c0 2.1-1.6 3.4-3.5 3.4h-7.3m1.7-1.7-1.7 1.7 1.7 1.7" stroke-width="1.8"/>
+  </g>
+</svg>

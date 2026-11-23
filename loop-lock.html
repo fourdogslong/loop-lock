@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loop Lock</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font: 12px -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      --surface: #252525;
+      --field: #1d1d1d;
+      --edge: #3d3d3d;
+      --copy: #dedede;
+      --subtle: #a2a2a2;
+      --active: #e5b747;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--surface); color: var(--copy); }
+    main { position: relative; padding: 8px 9px; }
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(37px, 1fr) minmax(0, max-content) minmax(37px, 1fr);
+      align-items: center;
+      gap: 4px;
+    }
+    #help { justify-self: end; }
+    button, output {
+      border: 1px solid var(--edge);
+      border-radius: 3px;
+      padding: 4px 8px;
+      min-height: 25px;
+    }
+    button { background: #303030; color: inherit; font: inherit; font-weight: 600; cursor: pointer; }
+    button:hover:not(:disabled) { background: #393939; }
+    button:disabled { opacity: .45; cursor: default; }
+    button[aria-pressed="true"] { border-color: var(--active); color: var(--active); background: #3a3324; }
+    button:focus-visible { outline: 1px solid var(--active); outline-offset: 2px; }
+    #persistent {
+      display: grid;
+      place-items: center;
+      width: 37px;
+      height: 34px;
+      padding: 0;
+      border-color: #141516;
+      background: linear-gradient(#878c8e, #696d6e);
+      box-shadow: inset 0 1px 1px #fff5, 0 1px 2px #000a;
+      color: #151718;
+    }
+    #persistent:hover:not(:disabled) { background: linear-gradient(#a0a5a7, #808587); }
+    #persistent[aria-pressed="true"] {
+      background: #f5f5f2;
+      box-shadow: inset 0 0 2px #fff, 0 0 5px #fff8;
+    }
+    #persistent svg { width: 25px; height: 25px; }
+    output {
+      min-width: 0;
+      background: var(--field);
+      font-variant-numeric: tabular-nums;
+      overflow-wrap: anywhere;
+      text-align: center;
+    }
+    summary {
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      list-style: none;
+      border: 1px solid var(--edge);
+      border-radius: 3px;
+      background: #303030;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    summary svg { width: 15px; height: 15px; }
+    .setting { display: flex; align-items: flex-start; gap: 5px; }
+    .setting input { flex: none; margin: 1px 0 0; accent-color: var(--active); }
+    .hint .setting-hint { margin: 4px 0 8px; }
+    summary::-webkit-details-marker { display: none; }
+    summary:hover, details[open] summary { background: #393939; }
+    summary:focus-visible { outline: 1px solid var(--active); outline-offset: 2px; }
+    .hint {
+      position: absolute;
+      z-index: 1;
+      inset: calc(100% + 1px) 9px auto auto;
+      width: min(250px, calc(100% - 18px));
+      padding: 9px 32px 9px 9px;
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      background: var(--field);
+      box-shadow: 0 4px 12px #0008;
+    }
+    .hint p { margin: 0; color: var(--subtle); font-size: 11px; line-height: 1.4; }
+    .hint p + p { margin-top: 6px; }
+    #update { margin-top: 8px; }
+    #close-help {
+      position: absolute;
+      inset: 4px 4px auto auto;
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      min-height: 0;
+      padding: 0;
+      border-color: transparent;
+      background: transparent;
+      color: var(--subtle);
+      font-size: 16px;
+    }
+    #close-help:hover { background: #393939; color: var(--copy); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="controls">
+      <button id="persistent" type="button" aria-label="Persistent Loop" title="Persistent Loop" aria-pressed="false" disabled>
+        <svg viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M10.5 12V8a5.5 5.5 0 0 1 11 0v4" stroke-width="2.2"/>
+          <rect x="5" y="12" width="22" height="17" rx="3.2" stroke-width="2.2"/>
+          <path d="M10.5 20.6c0-2.1 1.6-3.4 3.5-3.4h7.3m-1.7-1.7 1.7 1.7-1.7 1.7m1.9 1.5c0 2.1-1.6 3.4-3.5 3.4h-7.3m1.7-1.7-1.7 1.7 1.7 1.7" stroke-width="1.8"/>
+        </svg>
+      </button>
+      <output id="range" aria-label="Loop range">—</output>
+      <details id="help">
+        <summary aria-label="Loop Lock settings" title="Loop Lock settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+            <path d="M10 3h4l.6 2.6 1.6.9 2.6-.8 2 3.5-2 1.8v1.9l2 1.8-2 3.5-2.6-.8-1.6.9L14 21h-4l-.6-2.7-1.6-.9-2.6.8-2-3.5 2-1.8V11l-2-1.8 2-3.5 2.6.8 1.6-.9L10 3Z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </summary>
+        <div class="hint">
+          <button id="close-help" type="button" aria-label="Close settings">×</button>
+          <label class="setting">
+            <input id="auto-unlink" type="checkbox" checked aria-describedby="auto-unlink-hint">
+            Turn off Link Edit/Play Selections while Loop Lock is on
+          </label>
+          <p id="auto-unlink-hint" class="setting-hint">Keeps edit selections independent. Loop Lock follows the edit cursor for playback and restores your previous Link Edit/Play Selections setting when turned off.</p>
+          <p id="status" role="status">Connecting to LUNA…</p>
+          <p>LUNA’s orange loop ruler may update a moment after the loop range changes.</p>
+          <button id="update" type="button" hidden>Use Timeline Selection</button>
+        </div>
+      </details>
+    </div>
+  </main>
+  <script src="vendor/luna.global.js"></script>
+  <script src="logic.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
