@@ -156,6 +156,23 @@ async function bindSession(luna) {
     if (cursor !== null) schedule();
   }));
 
+  // Transport control must run at the same speed in every panel state. The
+  // SDK's default callback batching depends on animation frames and timers.
+  const controlPaths = new Set([
+    `${context.path}/selection_start`,
+    `${context.path}/settings`,
+    `${session.path}/looping`,
+    `${session.path}/play_start`,
+    `${session.path}/loop_start`,
+    `${session.path}/loop_stop`,
+  ]);
+  unsubscribes.push(luna.raw.subscribe(session.path, ({ path }) => {
+    if (!locked || !controlPaths.has(path.replace(/\/value$/, ''))) return;
+    queueMicrotask(() => {
+      if (!disposed && locked) void luna.settled();
+    });
+  }, { recursive: true }));
+
   toggle.onclick = () => {
     stopObserving();
     locked = locked ? null : readOrangeLoop(context) ?? readLoop(transport);

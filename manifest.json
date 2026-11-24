@@ -2,7 +2,7 @@
   "package_name": "Loop Lock",
   "id": "com.fourdogslong.loop_lock",
   "title": "Loop Lock",
-  "version": "0.3.16",
+  "version": "0.3.17",
   "description": "Keep a loop active while moving the Timeline playback start.",
   "sdk_version": "3.1.2",
   "min_luna_version": "3.1.2",

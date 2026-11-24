@@ -11,7 +11,7 @@ A LUNA Browser Add On by **fourdogslong** that preserves the orange Loop ruler r
 Requires LUNA 3.1.2 or later.
 
 - In LUNA, open **Add Ons → Manage → Import URL** and enter `https://github.com/Fourdogslong/loop-lock`.
-- Or download `Loop-Lock-0.3.16.lunaaddon` from the [latest release](https://github.com/Fourdogslong/loop-lock/releases/latest) and open it in LUNA.
+- Or download the `.lunaaddon` package from the [latest release](https://github.com/Fourdogslong/loop-lock/releases/latest) and open it in LUNA.
 
 ## Use
 
@@ -21,6 +21,8 @@ Requires LUNA 3.1.2 or later.
 4. Drag the orange range or use LUNA’s **Update Loop** command (⌘L on macOS) to change the loop location.
 
 By default, Loop Lock turns off **Link Edit/Play Selections** while active and restores your previous setting when you turn it off. You can change this in the settings.
+
+Loop Lock stays active when you close its panel or switch to another Browser Add On.
 
 Starting at or after the orange loop end plays forward. Loop Lock remembers the range for when you move back before its end. LUNA’s orange ruler may update a moment after the range changes.
 
