@@ -29,3 +29,7 @@ Starting at or after the orange loop end plays forward. Loop Lock remembers the 
 ## Build
 
 Run `ua-builder pack` from this repository with LUNA Builder SDK 3.1.2. The vendored Universal Audio SDK is available under the Apache 2.0 license in [vendor/LICENSE](vendor/LICENSE) with [vendor/NOTICE](vendor/NOTICE).
+
+## Support
+
+If you enjoy this add-on and would like to support my work, consider [sponsoring me on GitHub](https://github.com/sponsors/fourdogslong). You can also use the **Sponsor** button at the top of this repository.
